@@ -1,10 +1,14 @@
-from .views import login, signup, show_all_users, show_a_user
-from .models import User, LoginOut
-
 from typing import List
 
 from fastapi import APIRouter
 from fastapi import status
+
+from .models import LoginOut
+from .models import User
+from .views import login
+from .views import show_a_user
+from .views import show_all_users
+from .views import signup
 
 
 router = APIRouter(prefix="/api/v1")
@@ -17,7 +21,7 @@ router.add_api_route(
     status_code=status.HTTP_201_CREATED,
     summary="Register a User",
     tags=["Users"],
-    methods=["POST"]
+    methods=["POST"],
 )
 
 router.add_api_route(
@@ -27,7 +31,7 @@ router.add_api_route(
     status_code=status.HTTP_200_OK,
     summary="Login a User",
     tags=["Users"],
-    methods=["POST"]
+    methods=["POST"],
 )
 
 
@@ -37,7 +41,7 @@ router.add_api_route(
     response_model=List[User],
     status_code=status.HTTP_200_OK,
     summary="Show all User",
-    tags=["Users"]
+    tags=["Users"],
 )
 
 
@@ -48,5 +52,5 @@ router.add_api_route(
     status_code=status.HTTP_200_OK,
     summary="Show a User",
     tags=["Users"],
-    methods=["GET"]
+    methods=["GET"],
 )

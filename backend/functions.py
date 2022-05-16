@@ -1,6 +1,7 @@
 import json
 
-from fastapi import status, HTTPException
+from fastapi import HTTPException
+from fastapi import status
 
 
 def read_data(file):
@@ -22,8 +23,7 @@ def show_data(file, id, info):
             return data
     else:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"¡This {info} doesn't exist!"
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"¡This {info} doesn't exist!"
         )
 
 
@@ -37,6 +37,5 @@ def delete_data(file, id, info):
             return data
     else:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"¡This {info} doesn't exist!"
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"¡This {info} doesn't exist!"
         )

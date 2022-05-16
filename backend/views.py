@@ -1,11 +1,15 @@
-from .models import UserRegister, LoginOut
-from .functions import read_data, show_data
-
-from uuid import UUID
-from pydantic import EmailStr
-from fastapi import Body, Form, Path
-
 import json
+from uuid import UUID
+
+from fastapi import Body
+from fastapi import Form
+from fastapi import Path
+from pydantic import EmailStr
+
+from .functions import read_data
+from .functions import show_data
+from .models import LoginOut
+from .models import UserRegister
 
 
 def signup(user: UserRegister = Body(...)):
@@ -13,10 +17,10 @@ def signup(user: UserRegister = Body(...)):
     Signup
     - This path operation register a user in the app
 
-    Parameters: 
+    Parameters:
     - Request body parameter
         - user: UserRegister
-    Returns a json with the basic user information: 
+    Returns a json with the basic user information:
     - user_id: UUID
     - email: Emailstr
     - first_name: str
@@ -46,7 +50,7 @@ def login(email: EmailStr = Form(...), password: str = Form(...)):
     """
     data = read_data("users")
     for user in data:
-        if email == user['email'] and password == user['password']:
+        if email == user["email"] and password == user["password"]:
             return LoginOut(email=email)
         else:
             return LoginOut(email=email, message="Login Unsuccesfully!")
@@ -57,13 +61,13 @@ def show_all_users():
     # [Show all users]
     This path operation shows all user in the app
     ### Parameters
-    - 
+    -
     ### Returns a json with the all users in the app, with the following keys:
     - user_id: UUID
     - email: EmailStr
     - first_name: str
     - last_name: str
-    - birth_date: datetime        
+    - birth_date: datetime
     """
     with open("users.json", "r", encoding="utf-8") as f:
         results = json.loads(f.read())
@@ -71,17 +75,13 @@ def show_all_users():
 
 
 def show_a_user(
-    user_id: UUID = Path(
-        ...,
-        title="User_id",
-        description="This is the person id"
-    )
+    user_id: UUID = Path(..., title="User_id", description="This is the person id")
 ):
     """
     # [Show a user]
     This path operation show a user in the app
     ### Parameters
-    - Request body parameter: 
+    - Request body parameter:
         - **user_id: UUID**
 
     ### Returns a json with the a user in the app, with the following keys:
@@ -89,6 +89,6 @@ def show_a_user(
     - email: EmailStr
     - first_name: str
     - last_name: str
-    - birth_date: datetime        
+    - birth_date: datetime
     """
     return show_data("users", user_id, "user")
