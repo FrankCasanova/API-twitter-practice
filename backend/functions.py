@@ -5,7 +5,7 @@ from fastapi import status
 
 
 def read_data(file):
-    with open(f"{file}.json", "r+", encoding="utf-8") as f:
+    with open(f"backend/{file}.json", "r+", encoding="utf-8") as f:
         return json.loads(f.read())  # Convert a file to a json
 
 
