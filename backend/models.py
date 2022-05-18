@@ -13,6 +13,7 @@ from pydantic import Field
 
 class UserBase(BaseModel):
     user_id: UUID = Field(...)
+    email: EmailStr = Field(...)
 
 
 class UserLogin(UserBase):

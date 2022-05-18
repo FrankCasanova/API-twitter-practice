@@ -10,9 +10,9 @@ def read_data(file):
 
 
 def overwrite_data(file, result):
-    with open(f"{file}.json", "w", encoding="utf-8") as f:
+    with open(f"backend/{file}.json", "w", encoding="utf-8") as f:
         f.seek(0)  # move to the beginning of the file
-        f.write(json.dumps(result))  # converting a json to a list
+        f.write(json.dumps(result, default=str))  # converting a json to a list
 
 
 def show_data(file, id, info):

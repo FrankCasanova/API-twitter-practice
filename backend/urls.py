@@ -4,11 +4,18 @@ from fastapi import APIRouter
 from fastapi import status
 
 from .models import LoginOut
-from .models import User, Tweet
+from .models import Tweet
+from .models import User
+from .views import delete_a_tweet
+from .views import delete_a_user
+from .views import home
 from .views import login
+from .views import post
+from .views import show_a_tweet
 from .views import show_a_user
 from .views import show_all_users
-from .views import signup, delete_a_user, home, post, show_a_tweet, update_a_tweet, delete_a_tweet
+from .views import signup
+from .views import update_a_tweet
 
 
 router = APIRouter(prefix="/api/v1")
@@ -57,7 +64,6 @@ router.add_api_route(
 
 
 router.add_api_route(
-
     path="/users/{user_id}/delete",
     endpoint=delete_a_user,
     response_model=User,
